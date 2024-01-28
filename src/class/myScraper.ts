@@ -40,8 +40,8 @@ interface puppOption {
 // class
 export class Scrape {
 
-  static browser: puppeteer.Browser;// static browser
-  static page: puppeteer.Page; // static page
+  static browser: any;// static browser
+  static page: any; // static page
 
   // constractor
   constructor() {
@@ -55,7 +55,7 @@ export class Scrape {
           headless: true, // no display mode
           executablePath: getChromePath(), // chrome.exe path
           ignoreDefaultArgs: [], // ignore extensions
-          args:[], // args
+          args: [], // args
         }
         // lauch browser
         Scrape.browser = await puppeteer.launch(puppOptions);
@@ -325,7 +325,7 @@ export class Scrape {
     return new Promise(async (resolve, reject) => {
       try {
         // detect page
-        const isSucceeded = await Scrape.page.$(element).then(res => !!res);
+        const isSucceeded = await Scrape.page.$(element).then((res: any) => !!res);
         // resolved
         resolve(isSucceeded);
 
@@ -366,11 +366,11 @@ const getChromePath = (): string => {
 }
 
 // outuput error
-const outErrorMsg = (e: unknown, no: number):void => {
+const outErrorMsg = (e: unknown, no: number): void => {
 
   // if type is error
   if (e instanceof Error) {
     // error
     console.log(`${no}: ${e.message}`);
-  }  
+  }
 }

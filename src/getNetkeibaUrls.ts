@@ -7,7 +7,7 @@
 
 //* Constants
 const WINDOW_WIDTH: number = 1000; // window width
-const WINDOW_HEIGHT:number = 1000; // window height
+const WINDOW_HEIGHT: number = 1000; // window height
 const DEFAULT_ENCODING: string = 'utf8'; // encoding
 const CSV_ENCODING: string = 'Shift_JIS'; // csv encoding
 const TARGET_URL: string = 'https://www.netkeiba.com/'; // base url
@@ -78,7 +78,7 @@ const headerObjArray: Csvheaders[] = [
 ];
 
 // choose csv data
-const getCsvData = (): Promise<string[]>  => {
+const getCsvData = (): Promise<string[]> => {
   return new Promise((resolve, reject) => {
     // options
     const dialogOptions: csvDialog = {
@@ -96,7 +96,7 @@ const getCsvData = (): Promise<string[]>  => {
         // resolved
         resolve(result.filePaths);
 
-      // no file
+        // no file
       } else {
         // rejected
         reject(result.canceled);
@@ -114,7 +114,7 @@ const getCsvData = (): Promise<string[]>  => {
 // show dialog
 const showDialog = (title: any, message: any, detail: any, flg: boolean = false) => {
   // dialog options
-  const options: dialogOptions = {
+  const options: any = {
     type: '',
     title: title,
     message: message,
@@ -198,7 +198,7 @@ app.on('ready', async () => {
       tmpRecords = await parse(str, recordOptions);
 
       // horse names
-      const records:string[] = await tmpRecords.map(item => item[0]);
+      const records: string[] = await tmpRecords.map(item => item[0]);
 
       // goto page
       await scraper.doGo(TARGET_URL);
@@ -247,14 +247,14 @@ app.on('ready', async () => {
       mainWindow.close();
 
     });
-    
+
     // closing
     mainWindow.on('closed', () => {
       // release window
       mainWindow = null;
     });
 
-  } catch (e:unknown) {
+  } catch (e: unknown) {
     // show error dialog
     showDialog('export error', 'error occured when exporting csv.', e, true);
   }
